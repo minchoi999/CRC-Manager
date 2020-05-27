@@ -12,10 +12,6 @@ public class ApplicationConfiguration {
     @Autowired
     private Environment env;
 
-    public String getClashRoyaleApiBaseUrl() {
-        return env.getProperty("clash.royale.api.base.url");
-    }
-
     public String getClashRoyaleApiKey() {
         return env.getProperty("clash.royale.api.key");
     }

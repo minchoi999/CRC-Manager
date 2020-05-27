@@ -10,42 +10,37 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Collections;
 
-public class ClashRoyaleRestServiceAdapter<ResponseType> extends RestServiceAdapter<ResponseType> {
+public abstract class ClashRoyaleRestServiceAdapter<RequestType, ResponseType> extends RestServiceAdapter<RequestType, ResponseType> {
 
     @NonNull
-    private RestTemplate restTemplate;
-    @NonNull
-    private ApplicationConfiguration appConfig;
-
-    private HttpHeaders httpHeaders;
+    private final ApplicationConfiguration appConfig;
 
     public ClashRoyaleRestServiceAdapter(final RestTemplate restTemplate,
                                          final ApplicationConfiguration appConfig) {
         super(restTemplate);
-        this.restTemplate = restTemplate;
         this.appConfig = appConfig;
-        this.httpHeaders = buildHeaders();
     }
 
     protected ResponseEntity<ResponseType> get(final Class<ResponseType> clazz,
-                                               final String url,
+                                               final String urlTemplate,
                                                final Object... params) throws RestClientException {
-        return get(clazz, httpHeaders, url, params);
+        return get(clazz, buildHeaders(), urlTemplate, params);
     }
 
     protected ResponseEntity<ResponseType> post(final Class<ResponseType> clazz,
-                                                final String url,
+                                                final String urlTemplate,
                                                 final Object... params) throws RestClientException {
-        return post(clazz, httpHeaders, url, params);
+        return post(clazz, buildHeaders(), urlTemplate, params);
     }
 
     protected ResponseEntity<ResponseType> put(final Class<ResponseType> clazz,
-                                               final String url,
+                                               final String urlTemplate,
                                                final Object... params) throws RestClientException {
-        return put(clazz, httpHeaders, url, params);
+        return put(clazz, buildHeaders(), urlTemplate, params);
     }
 
-    private HttpHeaders buildHeaders() {
+    @Override
+    protected HttpHeaders buildHeaders() {
         final HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
         httpHeaders.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));

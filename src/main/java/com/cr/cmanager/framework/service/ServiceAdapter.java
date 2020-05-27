@@ -1,9 +1,8 @@
 package com.cr.cmanager.framework.service;
 
-import lombok.NonNull;
-import org.springframework.web.client.RestTemplate;
+import com.cr.cmanager.framework.exception.InvalidRequestException;
 
-public interface ServiceAdapter<ResponseType> {
+public interface ServiceAdapter<RequestType, ResponseType> {
 
-    public ResponseType callService(String url);
+    ResponseType call(RequestType request) throws InvalidRequestException;
 }
