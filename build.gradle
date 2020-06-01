@@ -18,6 +18,7 @@ dependencies {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
 
+	// lombok
 	compileOnly 'org.projectlombok:lombok:1.18.12'
 	annotationProcessor 'org.projectlombok:lombok:1.18.12'
 
@@ -27,6 +28,12 @@ dependencies {
 	// https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient
 	compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.12'
 
+	// Rate limiter
+	// https://mvnrepository.com/artifact/com.github.vladimir-bukhtoyarov/bucket4j-core
+	compile group: 'com.github.vladimir-bukhtoyarov', name: 'bucket4j-core', version: '4.10.0'
+
+	// Use Guava in your implementation only:
+	implementation("com.google.guava:guava:29.0-jre")
 }
 
 test {
