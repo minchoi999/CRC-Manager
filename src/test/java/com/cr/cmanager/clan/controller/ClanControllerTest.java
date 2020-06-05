@@ -17,7 +17,6 @@ import static org.mockito.Mockito.when;
 public class ClanControllerTest {
 
     private static final String CLAN_TAG = "clanTag";
-    private static final String CLAN_TO_STRING = "clan";
 
     @InjectMocks
     private ClanController clanController;
@@ -38,10 +37,9 @@ public class ClanControllerTest {
     @Test
     public void testIndex() throws Exception {
         when(adapter.call(CLAN_TAG)).thenReturn(adapterResponse);
-        when(adapterResponse.toString()).thenReturn(CLAN_TO_STRING);
 
-        final String actualResponse = clanController.index(CLAN_TAG);
+        final Clan actualResponse = clanController.index(CLAN_TAG);
 
-        assertEquals(CLAN_TO_STRING, actualResponse);
+        assertEquals(adapterResponse, actualResponse);
     }
 }

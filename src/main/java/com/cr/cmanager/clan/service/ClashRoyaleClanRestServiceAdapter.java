@@ -31,7 +31,6 @@ public class ClashRoyaleClanRestServiceAdapter extends ClashRoyaleRestServiceAda
 
         final String urlTemplate = buildUrlTemplate(CLAN_PATH_TEMPLATE);
         final ResponseEntity<Clan> clanResponseEntity= get(Clan.class, urlTemplate, getFormattedClanTag(clanTag));
-
         return clanResponseEntity.getBody();
     }
 
